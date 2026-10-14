@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Morning Call com dados datados, notícias verificáveis e histórico de edições.">
+<title>Morning Call · {{ date_label }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>{% include 'style.css' %}
+ a {color:inherit} .news-item a,.lead a,.agenda a{color:var(--accent-down);text-decoration:underline;text-underline-offset:3px} .quote-label a{text-decoration:none}
+ .notice{border:1px solid var(--ink);padding:13px 16px;margin-top:18px;font-size:13px;background:var(--paper-shade)}
+ .verified{font-size:10px;margin-top:6px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace}
+ .news-item .source a{color:var(--accent-down)} .history{padding-top:32px;border-top:2px solid var(--ink);margin-top:35px} .history h3{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:12px}
+ .history-links{display:flex;flex-wrap:wrap;gap:9px}.history-links a{font-family:'JetBrains Mono',monospace;font-size:11px;padding:7px 10px;border:1px solid var(--ink);text-decoration:none}
+ .history-links a:hover{background:var(--paper-shade)}.footer{margin-top:35px} .footer a{color:#f4ede0}
+</style>
+</head>
+<body><main class="newspaper">
+<div class="masthead-top"><div>Edição diária · {{ edition }}</div><div>Fontes e horários indicados em cada item</div></div>
+<header class="masthead"><div class="kicker">Inteligência de mercado</div><h1>Morning Call</h1>
+<div class="tagline">"O que move os mercados antes que eles se movam."</div>
+<div class="generated-by">Edição automatizada · Fontes verificáveis</div>
+<div class="stamp"><span>{{ date_label }}</span><span class="extracted">Atualização: {{ run_time }}</span><span>{{ edition }}</span></div></header>
+<section class="quotes-block"><div class="quotes-section"><div class="quotes-title">Mercado · Últimas observações disponíveis (não são cotações ao vivo)</div><div class="quotes-grid">
+{% for q in quotes[:5] %}<div class="quote-cell"><div class="quote-label"><a href="{{ q.url }}" target="_blank" rel="noopener noreferrer">{{ q.label }}</a></div>
+<div class="quote-value">{{ q.value }}</div><div class="quote-delta {{ q.direction }}">{{ q.delta }}</div>
+<div class="verified">{{ q.observed }}</div></div>{% endfor %}</div></div>
+{% for q in quotes[5:] %}<div class="quotes-section"><div class="quotes-title">Indicadores complementares</div><div class="quotes-grid" style="grid-template-columns:1fr">
+<div class="quote-cell"><div class="quote-label"><a href="{{ q.url }}" target="_blank" rel="noopener noreferrer">{{ q.label }}</a></div><div class="quote-value">{{ q.value }}</div><div class="quote-delta {{ q.direction }}">{{ q.delta }}</div><div class="verified">{{ q.observed }}</div></div></div></div>{% endfor %}
+</section>
+<div class="notice"><strong>Transparência dos dados:</strong> {{ available }}/{{ total }} cotações válidas nesta edição. A variação compara a última observação ao fechamento anterior informado pelo provedor, que pode não refletir a última sessão quando houver feriado ou lacuna. Fonte das cotações: endpoint não oficial do Yahoo Finance; sujeito a interrupções e restrições. Os valores não são garantidos em tempo real. Se uma cotação não puder ser validada, é ocultada.</div>
+<section class="lead-section"><div class="lead"><span class="section-tag">Manchete em destaque</span>
+{% if lead %}<h2><a href="{{ lead.url }}" target="_blank" rel="noopener noreferrer">{{ lead.title }}</a></h2>
+<div class="deck">Notícia publicada por {{ lead.source }} em {{ lead.when }} (Brasília). Destaque selecionado automaticamente por recência entre os feeds monitorados — não é uma avaliação editorial de relevância.</div>
+<div class="lead-grid"><div class="lead-body"><p>Acesse a reportagem original para os detalhes, a contextualização e a confirmação das informações. Este resumo automatizado reproduz apenas a manchete recebida do agregador, sem acrescentar fatos não verificados.</p></div>
+<aside class="impact-card"><div class="impact-label">Pontos de atenção</div><h4>Interpretação cautelosa</h4><ul class="impact-list"><li>Uma manchete isolada não confirma impacto em preços.</li><li>Confira o horário da notícia e as cotações antes de operar.</li><li>A leitura de tendência (bullish/bearish) exige validação independente.</li></ul></aside></div>
+{% else %}<h2>Sem manchete validada nesta edição</h2><div class="deck">As fontes não retornaram notícias recentes com horário e link verificáveis.</div>{% endif %}
+</div></section>
+<section class="news-section"><div class="section-header"><h3>Notícias do Pregão</h3><div class="meta">{{ news|length }} destaques · últimas 30 horas</div></div>
+{% if news %}<div class="news-grid">{% for n in news %}<article class="news-item"><div class="sentiment-row"><div class="cat brasil">{{ n.category }}</div><span class="sentiment-tag misto">Sem sinal</span></div>
+<h5><a href="{{ n.url }}" target="_blank" rel="noopener noreferrer">{{ n.title }}</a></h5><p class="summary">{{ n.summary }}</p>
+<div class="impact-text"><span class="impact-label">Impacto esperado</span>{{ n.impact }}</div>
+<div class="source">Fonte: <a href="{{ n.url }}" target="_blank" rel="noopener noreferrer">{{ n.source }}</a> · {{ n.when }} BRT</div></article>{% endfor %}</div>
+{% else %}<div class="notice">Nenhuma notícia válida encontrada. A geração evita preencher manchetes com informações não confirmadas.</div>{% endif %}</section>
+<section class="agenda-section"><div class="agenda"><h3>Agenda do Dia</h3><table class="agenda-table"><thead><tr><th>Hora (BRT)</th><th>Região</th><th>Evento</th><th>Relevância</th></tr></thead>
+<tbody>{% for e in events %}<tr><td class="time">{{ e.time }}</td><td class="region">{{ e.region }}</td><td><a href="{{ e.url }}" target="_blank" rel="noopener noreferrer">{{ e.title }}</a></td><td>{{ e.relevance }}</td></tr>{% else %}
+<tr><td colspan="4">Não há eventos confirmados cadastrados para esta data. Isso não significa ausência de divulgações no calendário econômico.</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="history"><h3>Arquivo de edições</h3><div class="history-links">{% for e in history|default([]) %}<a href="{{ ('../' if history_root|default(false) else '') ~ e.path }}" data-path="{{ e.path }}">{{ e.date }}</a>{% else %}<span>Histórico iniciado nesta edição.</span>{% endfor %}</div></section>
+<footer class="footer"><div><div class="footer-label">MORNING CALL</div><div class="footer-text">Leitura de mercado com data, fonte e histórico de cada edição.</div><a href="{{ '../index.html' if history_root|default(false) else 'index.html' }}">Página inicial</a></div>
+<div class="disclaimer-block"><span class="disclaimer-label">Aviso legal</span><div class="disclaimer">Material automatizado e informativo, sujeito a erros, indisponibilidade e atrasos de provedores. Não constitui recomendação ou oferta de compra ou venda. Sempre confira as fontes originais. O HTML preserva a identidade editorial do modelo disponibilizado pelo usuário.</div></div></footer>
+</main></body></html>

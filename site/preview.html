@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Morning Call com dados datados, notícias verificáveis e histórico de edições.">
+<title>Morning Call · 14/10/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4ede0;
+    --paper-shade: #ebe2d1;
+    --ink: #1a1814;
+    --ink-soft: #3d3830;
+    --accent-up: #1f5d3a;
+    --accent-down: #8b1a1a;
+    --accent-flat: #8a7a4f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; line-height: 1.55; }
+  body { background-image: radial-gradient(circle at 20% 30%, rgba(139,119,89,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(139,119,89,0.05) 0%, transparent 50%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"); min-height: 100vh; padding: 40px 20px; }
+  .newspaper { max-width: 1180px; margin: 0 auto; background: var(--paper); border: 1px solid var(--ink); box-shadow: 0 30px 80px -20px rgba(26,24,20,0.25); padding: 50px 60px 60px; }
+  .masthead-top { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 14px; border-bottom: 1px solid var(--ink); }
+  .masthead { text-align: center; padding: 28px 0 18px; border-bottom: 4px double var(--ink); }
+  .masthead .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent-down); margin-bottom: 12px; }
+  .masthead h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 84px; line-height: 0.9; letter-spacing: -0.025em; text-transform: uppercase; }
+  .masthead .tagline { font-style: italic; font-size: 15px; color: var(--ink-soft); margin-top: 14px; }
+  .masthead .generated-by { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 14px; color: var(--ink-soft); }
+  .masthead .generated-by a { color: var(--accent-down); text-decoration: none; font-weight: 600; border-bottom: 1.5px solid var(--accent-down); padding-bottom: 1px; }
+  .masthead .stamp { display: flex; justify-content: space-between; margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); border-top: 1px solid var(--ink); padding-top: 14px; }
+  .stamp .extracted { color: var(--accent-down); font-weight: 600; }
+  .quotes-block { border-bottom: 1px solid var(--ink); }
+  .quotes-section { border-bottom: 1px dotted var(--ink-soft); }
+  .quotes-section:last-child { border-bottom: none; }
+  .quotes-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--paper); background: var(--ink); padding: 6px 14px; }
+  .quotes-grid { display: grid; grid-template-columns: repeat(5, 1fr); background: var(--paper-shade); }
+  .quote-cell { padding: 16px 14px; border-right: 1px solid var(--ink); text-align: center; }
+  .quote-cell:last-child { border-right: none; }
+  .quote-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+  .quote-value { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 21px; line-height: 1; }
+  .quote-delta { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 6px; font-weight: 600; }
+  .up { color: var(--accent-up); } .down { color: var(--accent-down); } .flat { color: var(--accent-flat); }
+  .lead-section { padding: 36px 0 30px; border-bottom: 1px solid var(--ink); }
+  .section-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 5px 12px; margin-bottom: 16px; }
+  .lead h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 44px; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 920px; }
+  .lead .deck { font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink-soft); max-width: 820px; margin-bottom: 24px; border-left: 3px solid var(--accent-down); padding-left: 16px; }
+  .lead-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; padding-top: 8px; }
+  .lead-body p { font-size: 16px; line-height: 1.7; margin-bottom: 14px; }
+  .lead-body p:first-child::first-letter { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 64px; line-height: 0.85; float: left; padding: 6px 10px 0 0; color: var(--accent-down); }
+  .impact-card { background: var(--paper-shade); border: 1px solid var(--ink); padding: 24px; align-self: start; position: relative; }
+  .impact-card::before { content: ""; position: absolute; top: -1px; left: -1px; right: -1px; height: 4px; background: var(--accent-down); }
+  .impact-card .impact-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
+  .impact-card h4 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; margin-bottom: 16px; }
+  .impact-list { list-style: none; }
+  .impact-list li { font-size: 14px; line-height: 1.5; padding: 10px 0; border-bottom: 1px dotted var(--ink-soft); }
+  .impact-list li:last-child { border-bottom: none; }
+  .news-section { padding: 36px 0 24px; }
+  .section-header { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 28px; }
+  .section-header h3 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 32px; text-transform: uppercase; }
+  .section-header .meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+  .news-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--ink); }
+  .news-item { padding: 22px 20px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); display: flex; flex-direction: column; }
+  .news-item:nth-child(3n) { border-right: none; }
+  .news-item .cat { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0; font-weight: 600; }
+  .cat.global { color: #2c5282; } .cat.brasil { color: var(--accent-up); } .cat.commodities { color: #8a5a1f; } .cat.macro { color: var(--accent-down); } .cat.corp { color: #5a3a7a; }
+  .news-item h5 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; line-height: 1.18; margin-bottom: 10px; }
+  .news-item p.summary { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 12px; }
+  .news-item .impact-text { font-size: 13px; color: var(--ink-soft); margin-top: auto; padding-top: 10px; border-top: 1px dotted var(--ink-soft); line-height: 1.5; }
+  .news-item .impact-label { text-transform: uppercase; letter-spacing: 0.15em; font-size: 10px; font-family: 'JetBrains Mono', monospace; display: block; margin-bottom: 6px; color: var(--accent-down); font-weight: 600; }
+  .news-item .source { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--ink-soft); margin-top: 10px; font-style: italic; }
+  .news-item .sentiment-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; }
+  .sentiment-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 8px; border: 1px solid currentColor; font-weight: 600; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+  .sentiment-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; display: inline-block; }
+  .sentiment-tag.bullish { color: var(--accent-up); }
+  .sentiment-tag.bearish { color: var(--accent-down); }
+  .sentiment-tag.misto { color: var(--accent-flat); }
+  .agenda-section { margin-top: 40px; }
+  .agenda h3 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 26px; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 18px; }
+  .agenda-table { width: 100%; border-collapse: collapse; }
+  .agenda-table th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--ink); color: var(--ink-soft); }
+  .agenda-table td { padding: 12px 10px; border-bottom: 1px dotted var(--ink-soft); font-size: 14px; vertical-align: top; }
+  .agenda-table td.time { font-family: 'JetBrains Mono', monospace; font-weight: 600; width: 100px; }
+  .agenda-table td.region { width: 70px; font-weight: 600; }
+  .agenda-table .imp { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .imp.high { background: var(--accent-down); } .imp.med { background: var(--accent-flat); } .imp.low { background: var(--ink-soft); }
+  .footer { margin: 50px -60px -60px -60px; background: #1a1814; color: #d4c5a8; padding: 36px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .footer .cta-block { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; text-decoration: none; color: inherit; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .footer .cta-block:hover { transform: translateX(4px); }
+  .footer .cta-block:hover .cta-arrow { color: #f4ede0; border-bottom-color: #f4ede0; }
+  .footer .cta-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; line-height: 1.25; color: #f4ede0; max-width: 360px; letter-spacing: -0.005em; }
+  .footer .cta-logo { padding-top: 4px; }
+  .footer .cta-logo img { max-height: 38px; width: auto; display: block; }
+  .footer .cta-arrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #d4a574; border-bottom: 1px solid #d4a574; padding-bottom: 2px; margin-top: 6px; transition: color 0.2s ease, border-color 0.2s ease; }
+  .footer .disclaimer-block { border-left: 1px dotted #6b6052; padding-left: 24px; }
+  .footer .disclaimer { font-family: 'Source Serif 4', serif; font-style: italic; font-size: 11.5px; line-height: 1.55; color: #b3a484; }
+  .footer .disclaimer-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #8a7a4f; margin-bottom: 8px; display: block; }
+  @media (max-width: 900px) {
+    body { padding: 16px 8px; } .newspaper { padding: 24px 18px 30px; }
+    .masthead h1 { font-size: 48px; }
+    .quotes-grid { grid-template-columns: repeat(2, 1fr); }
+    .quote-cell { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+    .quote-cell:nth-child(2n) { border-right: none; }
+    .lead h2 { font-size: 30px; } .lead-grid { grid-template-columns: 1fr; gap: 24px; }
+    .news-grid { grid-template-columns: 1fr; } .news-item { border-right: none !important; }
+    .stamp { flex-direction: column; gap: 6px; text-align: center; }
+    .footer { grid-template-columns: 1fr; padding: 28px 18px; margin: 50px -18px -30px -18px; }
+    .footer .disclaimer-block { border-left: none; border-top: 1px dotted #6b6052; padding-left: 0; padding-top: 20px; }
+  } a {color:inherit} .news-item a,.lead a,.agenda a{color:var(--accent-down);text-decoration:underline;text-underline-offset:3px} .quote-label a{text-decoration:none}
+ .notice{border:1px solid var(--ink);padding:13px 16px;margin-top:18px;font-size:13px;background:var(--paper-shade)}
+ .verified{font-size:10px;margin-top:6px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace}
+ .news-item .source a{color:var(--accent-down)} .history{padding-top:32px;border-top:2px solid var(--ink);margin-top:35px} .history h3{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:12px}
+ .history-links{display:flex;flex-wrap:wrap;gap:9px}.history-links a{font-family:'JetBrains Mono',monospace;font-size:11px;padding:7px 10px;border:1px solid var(--ink);text-decoration:none}
+ .history-links a:hover{background:var(--paper-shade)}.footer{margin-top:35px} .footer a{color:#f4ede0}
+</style>
+</head>
+<body><div style="padding:18px;background:#8b1a1a;color:white;text-align:center;font-weight:bold">DEMONSTRAÇÃO · DADOS FICTÍCIOS · NÃO UTILIZAR PARA DECISÕES</div><main class="newspaper">
+<div class="masthead-top"><div>Edição diária · Atualização de mercado</div><div>Fontes e horários indicados em cada item</div></div>
+<header class="masthead"><div class="kicker">Inteligência de mercado</div><h1>Morning Call</h1>
+<div class="tagline">"O que move os mercados antes que eles se movam."</div>
+<div class="generated-by">Edição automatizada · Fontes verificáveis</div>
+<div class="stamp"><span>14/10/2026</span><span class="extracted">Atualização: 14/10/2026 às 10:26 BRT</span><span>Atualização de mercado</span></div></header>
+<section class="quotes-block"><div class="quotes-section"><div class="quotes-title">Mercado · Últimas observações disponíveis (não são cotações ao vivo)</div><div class="quotes-grid">
+<div class="quote-cell"><div class="quote-label"><a href="https://finance.yahoo.com/quote/%5EBVSP/" target="_blank" rel="noopener noreferrer">Ibovespa</a></div>
+<div class="quote-value">100</div><div class="quote-delta up">+1,01%</div>
+<div class="verified">14/10/2026 10:26 BRT</div></div><div class="quote-cell"><div class="quote-label"><a href="https://finance.yahoo.com/quote/BRL=X/" target="_blank" rel="noopener noreferrer">USD/BRL</a></div>
+<div class="quote-value">R$ 100,0000</div><div class="quote-delta up">+1,01%</div>
+<div class="verified">14/10/2026 10:26 BRT</div></div><div class="quote-cell"><div class="quote-label"><a href="https://finance.yahoo.com/quote/%5EGSPC/" target="_blank" rel="noopener noreferrer">S&amp;P 500</a></div>
+<div class="quote-value">100</div><div class="quote-delta up">+1,01%</div>
+<div class="verified">14/10/2026 10:26 BRT</div></div><div class="quote-cell"><div class="quote-label"><a href="https://finance.yahoo.com/quote/%5EIXIC/" target="_blank" rel="noopener noreferrer">Nasdaq Composite</a></div>
+<div class="quote-value">100</div><div class="quote-delta up">+1,01%</div>
+<div class="verified">14/10/2026 10:26 BRT</div></div><div class="quote-cell"><div class="quote-label"><a href="https://finance.yahoo.com/quote/BZ=F/" target="_blank" rel="noopener noreferrer">Brent (futuro)</a></div>
+<div class="quote-value">US$ 100,00</div><div class="quote-delta up">+1,01%</div>
+<div class="verified">14/10/2026 10:26 BRT</div></div></div></div>
+<div class="quotes-section"><div class="quotes-title">Indicadores complementares</div><div class="quotes-grid" style="grid-template-columns:1fr">
+<div class="quote-cell"><div class="quote-label"><a href="https://finance.yahoo.com/quote/%5ETNX/" target="_blank" rel="noopener noreferrer">US Treasury 10Y</a></div><div class="quote-value">100,00%</div><div class="quote-delta up">+1,01%</div><div class="verified">14/10/2026 10:26 BRT</div></div></div></div></section>
+<div class="notice"><strong>Transparência dos dados:</strong> 6/6 cotações válidas nesta edição. A variação compara a última observação ao fechamento anterior informado pelo provedor, que pode não refletir a última sessão quando houver feriado ou lacuna. Fonte das cotações: endpoint não oficial do Yahoo Finance; sujeito a interrupções e restrições. Os valores não são garantidos em tempo real. Se uma cotação não puder ser validada, é ocultada.</div>
+<section class="lead-section"><div class="lead"><span class="section-tag">Manchete em destaque</span>
+<h2><a href="https://example.org/exemplo" target="_blank" rel="noopener noreferrer">Exemplo ilustrativo: notícia simulada para testar o layout</a></h2>
+<div class="deck">Notícia publicada por Fonte fictícia em 14/10 10:26 (Brasília). Destaque selecionado automaticamente por recência entre os feeds monitorados — não é uma avaliação editorial de relevância.</div>
+<div class="lead-grid"><div class="lead-body"><p>Acesse a reportagem original para os detalhes, a contextualização e a confirmação das informações. Este resumo automatizado reproduz apenas a manchete recebida do agregador, sem acrescentar fatos não verificados.</p></div>
+<aside class="impact-card"><div class="impact-label">Pontos de atenção</div><h4>Interpretação cautelosa</h4><ul class="impact-list"><li>Uma manchete isolada não confirma impacto em preços.</li><li>Confira o horário da notícia e as cotações antes de operar.</li><li>A leitura de tendência (bullish/bearish) exige validação independente.</li></ul></aside></div>
+</div></section>
+<section class="news-section"><div class="section-header"><h3>Notícias do Pregão</h3><div class="meta">1 destaques · últimas 30 horas</div></div>
+<div class="news-grid"><article class="news-item"><div class="sentiment-row"><div class="cat brasil">Brasil · Mercados</div><span class="sentiment-tag misto">Sem sinal</span></div>
+<h5><a href="https://example.org/exemplo" target="_blank" rel="noopener noreferrer">Exemplo ilustrativo: notícia simulada para testar o layout</a></h5><p class="summary">Manchete publicada pela fonte indicada. Consulte a reportagem para verificar o contexto completo.</p>
+<div class="impact-text"><span class="impact-label">Impacto esperado</span>Leitura de mercado não inferida automaticamente; verifique os dados e a matéria original.</div>
+<div class="source">Fonte: <a href="https://example.org/exemplo" target="_blank" rel="noopener noreferrer">Fonte fictícia</a> · 14/10 10:26 BRT</div></article></div>
+</section>
+<section class="agenda-section"><div class="agenda"><h3>Agenda do Dia</h3><table class="agenda-table"><thead><tr><th>Hora (BRT)</th><th>Região</th><th>Evento</th><th>Relevância</th></tr></thead>
+<tbody><tr><td colspan="4">Não há eventos confirmados cadastrados para esta data. Isso não significa ausência de divulgações no calendário econômico.</td></tr></tbody></table></div></section>
+<section class="history"><h3>Arquivo de edições</h3><div class="history-links"><span>Histórico iniciado nesta edição.</span></div></section>
+<footer class="footer"><div><div class="footer-label">MORNING CALL</div><div class="footer-text">Leitura de mercado com data, fonte e histórico de cada edição.</div><a href="index.html">Página inicial</a></div>
+<div class="disclaimer-block"><span class="disclaimer-label">Aviso legal</span><div class="disclaimer">Material automatizado e informativo, sujeito a erros, indisponibilidade e atrasos de provedores. Não constitui recomendação ou oferta de compra ou venda. Sempre confira as fontes originais. O HTML preserva a identidade editorial do modelo disponibilizado pelo usuário.</div></div></footer>
+</main></body></html>
