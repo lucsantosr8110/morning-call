@@ -1,5 +1,13 @@
 name: Atualizar Morning Call
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/daily.yml'
+      - 'src/**'
+      - 'templates/**'
+      - 'config/**'
+      - 'requirements.txt'
   schedule:
     - cron: '30 7 * * 1-5'
       timezone: 'America/Sao_Paulo'
@@ -13,6 +21,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
